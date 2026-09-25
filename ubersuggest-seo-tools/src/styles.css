@@ -1,0 +1,220 @@
+/* Tailwind v4, ONE compilation for the DS + the app. The DS stylesheet brings
+   `@import "tailwindcss"` plus the theme tokens its components need; importing it
+   HERE (instead of separately in main.tsx) puts those tokens and our utilities in
+   the same Tailwind run. The explicit @source is essential: the DS class names
+   live in its compiled dist inside node_modules, which Tailwind's automatic
+   source detection never scans (and its heuristics shifted once .git appeared,
+   silently dropping ~70 kB of DS classes — unstyled, invisible DS buttons).
+   Token-derived utilities (shadow-cta-*, ring-ring) only generate when the theme
+   and the scan happen in the same compilation, hence one entry point. */
+@import "@ubersuggest/ui/styles.css";
+@source "../node_modules/@ubersuggest/ui/dist";
+
+/* Tailwind v4's preflight dropped v3's `cursor: pointer` on buttons, so every
+   clickable element here rendered the arrow cursor. Restore the pointer for
+   anything natively interactive — in @layer base on purpose, so an explicit
+   cursor utility still wins (the drawer backdrop's cursor-default, a future
+   cursor-wait), and :not(:disabled) keeps disabled controls on the arrow. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  select,
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+}
+
+/* System font fallback. Brand colors come from Tailwind's default orange/zinc
+   palettes, used directly in the components. */
+
+/* Borealis progress bar, same animation the Ubersuggest dashboard defines in
+   its globals.css — declared in @theme so Tailwind emits `animate-borealis-bar`. */
+@theme {
+  --animate-borealis-bar: borealisBar 2s linear infinite;
+
+  @keyframes borealisBar {
+    0% {
+      left: -30%;
+      transform: scaleX(1);
+    }
+
+    50% {
+      transform: scaleX(2);
+    }
+
+    100% {
+      left: 100%;
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Exit fade for a just-fixed issue row: it lingers green in the to-fix tab,
+   fades out, then moves to the Fixed tab (same pattern as the UBS dashboard's
+   next-actions row-exit-fade). Timing matches ROW_EXIT_MS in
+   features/issues/pages/issues.tsx. */
+.row-exit-fade {
+  animation: ubs-row-exit 1.4s ease forwards;
+}
+
+@keyframes ubs-row-exit {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Fade-in for the rotating crawl tips (crawl-progress.tsx re-keys the node on
+   each rotation so the animation replays). */
+@keyframes ubs-tip-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tip-fade {
+  animation: ubs-tip-fade 0.6s ease;
+}
+
+/* CSS port of the dashboard's SeoIconAnimated (motion/react there): bars rise
+   in a stagger (bar1 at 16-20%, bar2 at 32-36%, bar3 at 48-52% of the 3.8s
+   cycle), the trend line draws at 64-72%, everything collapses at 80-95%. Bars
+   scale from the collapsed sliver (3px of 18/28/37) to full height. */
+.seo-icon-bar {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: 3.8s ease-out infinite;
+}
+
+.seo-icon-bar1 {
+  animation-name: seoIconBar1;
+}
+
+.seo-icon-bar2 {
+  animation-name: seoIconBar2;
+}
+
+.seo-icon-bar3 {
+  animation-name: seoIconBar3;
+}
+
+@keyframes seoIconBar1 {
+  0%,
+  16% {
+    transform: scaleY(0.167);
+  }
+
+  20%,
+  80% {
+    transform: scaleY(1);
+  }
+
+  95%,
+  100% {
+    transform: scaleY(0.167);
+  }
+}
+
+@keyframes seoIconBar2 {
+  0%,
+  32% {
+    transform: scaleY(0.107);
+  }
+
+  36%,
+  80% {
+    transform: scaleY(1);
+  }
+
+  95%,
+  100% {
+    transform: scaleY(0.107);
+  }
+}
+
+@keyframes seoIconBar3 {
+  0%,
+  48% {
+    transform: scaleY(0.081);
+  }
+
+  52%,
+  80% {
+    transform: scaleY(1);
+  }
+
+  95%,
+  100% {
+    transform: scaleY(0.081);
+  }
+}
+
+.seo-icon-line {
+  stroke-dasharray: 1;
+  animation: seoIconLine 3.8s ease-in-out infinite;
+}
+
+@keyframes seoIconLine {
+  0%,
+  64% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+
+  72%,
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  95%,
+  100% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+}
+
+/* Auto-hiding scrollbar: the track width is always reserved (so showing/hiding
+   the thumb causes no layout shift), but the thumb is transparent until the
+   element is actively scrolling. App.tsx toggles `.is-scrolling` on scroll and
+   removes it after 2s of no scrolling, fading the thumb back out. */
+.auto-hide-scrollbar {
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: transparent transparent;
+}
+
+.auto-hide-scrollbar.is-scrolling {
+  scrollbar-color: rgba(113, 113, 122, 0.5) transparent;
+  /* zinc-500/50 */
+}
+
+.auto-hide-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.auto-hide-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+.auto-hide-scrollbar.is-scrolling::-webkit-scrollbar-thumb {
+  background-color: rgba(113, 113, 122, 0.5);
+  /* zinc-500/50 */
+}
