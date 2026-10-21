@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Ubersuggest SEO Tools
  * Description: Ubersuggest SEO tools inside WordPress: site audit, Core Web Vitals, and AI-generated fixes for your website.
- * Version:     1.2.1
+ * Version:     1.2.2
  * Requires PHP: 8.0
  * Requires at least: 6.0
  * Author:      Ubersuggest
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'UBS_SEO_VERSION', '1.2.1' );
+define( 'UBS_SEO_VERSION', '1.2.2' );
 define( 'UBS_SEO_PATH', plugin_dir_path( __FILE__ ) );
 define( 'UBS_SEO_URL', plugin_dir_url( __FILE__ ) );
 define( 'UBS_SEO_OPTION_KEY', 'ubs_seo_settings' );
@@ -32,9 +32,9 @@ define( 'UBS_SEO_OPTION_KEY', 'ubs_seo_settings' );
 // constant forever: the settings page stopped exposing the field, so a stage
 // switch could never reach an already-activated install. Same trap that killed
 // `oauth_base` — an install that stored a host kept talking to it.
-define( 'UBS_SEO_DEFAULT_BASE_URL', 'https://app.neilpatel.com' );
+define( 'UBS_SEO_DEFAULT_BASE_URL', 'https://ubersuggest.com' );
 // Ubersuggest web app — where we deep-link the user to check/upgrade their plan.
-define( 'UBS_SEO_APP_URL', 'https://app.neilpatel.com' );
+define( 'UBS_SEO_APP_URL', 'https://ubersuggest.com' );
 
 if ( ! defined( 'UBS_SEO_UBS_APP_KEY' ) ) {
     define( 'UBS_SEO_UBS_APP_KEY', '610881cbe73587a76566387c41c1c67a9cdfa1d2d0369d995a2f4eac8d069718' );

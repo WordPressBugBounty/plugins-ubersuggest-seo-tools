@@ -11,7 +11,7 @@ describe('appLink', () => {
     const url = new URL(appLink('/pricing', 'free_trial_paywall'));
 
     expect(url.origin + url.pathname).toBe(
-      'https://app.neilpatel.com/en/pricing',
+      'https://ubersuggest.com/en/pricing',
     );
     // The four constants come from PHP through the config fragment; only
     // utm_content is decided here.

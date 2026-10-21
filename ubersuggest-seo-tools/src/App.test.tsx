@@ -9,7 +9,7 @@ vi.mock('./api', () => ({
   apiGet: vi.fn(),
   apiPost: vi.fn(),
   appLink: (path: string, surface: string) =>
-    `https://app.neilpatel.com/en${path}?utm_content=${surface}`,
+    `https://ubersuggest.com/en${path}?utm_content=${surface}`,
   config: vi.fn(),
 }));
 
@@ -17,7 +17,7 @@ const DEFAULT_CONFIG = {
   restUrl: '',
   nonce: '',
   lang: 'en',
-  appUrl: 'https://app.neilpatel.com',
+  appUrl: 'https://ubersuggest.com',
   utm: {
     utm_source: 'wordpress-plugin',
     utm_medium: 'referral',

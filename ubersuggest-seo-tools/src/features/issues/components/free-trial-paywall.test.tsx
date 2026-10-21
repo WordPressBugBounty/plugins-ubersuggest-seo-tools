@@ -9,7 +9,7 @@ vi.mock('../../../api', () => ({
   apiPost: vi.fn().mockResolvedValue({ ok: true }),
   appLink: vi.fn(
     (path: string, surface: string) =>
-      `https://app.neilpatel.com/en${path}?utm_content=${surface}`,
+      `https://ubersuggest.com/en${path}?utm_content=${surface}`,
   ),
 }));
 
@@ -34,7 +34,7 @@ describe('FreeTrialPaywall', () => {
       'free_trial_paywall',
     );
     expect(windowOpen).toHaveBeenCalledWith(
-      'https://app.neilpatel.com/en/pricing?utm_content=free_trial_paywall',
+      'https://ubersuggest.com/en/pricing?utm_content=free_trial_paywall',
       '_blank',
       'noopener',
     );

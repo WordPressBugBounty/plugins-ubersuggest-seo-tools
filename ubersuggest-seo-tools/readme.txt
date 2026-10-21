@@ -4,7 +4,7 @@ Tags: seo, site audit, meta description, core web vitals, ubersuggest
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,11 +92,11 @@ Open the plugin's settings and choose to disconnect. You will be asked to confir
 
 = Where do I report a bug or ask for a feature? =
 
-Click Send Feedback, or reach us through Ubersuggest at app.neilpatel.com.
+Click Send Feedback, or reach us through Ubersuggest at ubersuggest.com.
 
 == External services ==
 
-This plugin is a client for Ubersuggest, the SEO service at app.neilpatel.com. The audit crawler, SEO scoring, and AI fix suggestions all run on that service, so an Ubersuggest account is required. Without one, the plugin cannot audit your site or propose fixes.
+This plugin is a client for Ubersuggest, the SEO service at ubersuggest.com. The audit crawler, SEO scoring, and AI fix suggestions all run on that service, so an Ubersuggest account is required. Without one, the plugin cannot audit your site or propose fixes.
 
 All requests are made from your server through the WordPress HTTP API, never from your visitors' browsers. They happen only inside wp-admin and only when a logged-in administrator performs an action.
 
@@ -116,6 +116,10 @@ Ubersuggest Terms of Use: https://neilpatel.com/terms/
 Ubersuggest Privacy Policy: https://npdigital.com/privacy-notice/
 
 == Changelog ==
+
+= 1.2.2 =
+
+* Connecting your Ubersuggest account works again. The plugin now talks to ubersuggest.com, the service's new address.
 
 = 1.2.1 =
 
@@ -146,6 +150,9 @@ Ubersuggest Privacy Policy: https://npdigital.com/privacy-notice/
 * First release.
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Fixes connecting your Ubersuggest account, which failed with a server error after the service moved to ubersuggest.com.
 
 = 1.1.0 =
 Adds a way to cancel a running crawl and prevents accidental duplicate crawls when clicking Recrawl.

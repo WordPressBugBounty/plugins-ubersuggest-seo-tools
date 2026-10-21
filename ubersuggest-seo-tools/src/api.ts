@@ -45,7 +45,7 @@ export function config(): Config {
       // The plugin maps the WordPress site locale to a supported language and
       // passes it here so both the DS and our strings render in that language.
       lang: parsed.lang ?? 'en',
-      appUrl: parsed.appUrl ?? 'https://app.neilpatel.com',
+      appUrl: parsed.appUrl ?? 'https://ubersuggest.com',
       utm: parsed.utm ?? DEFAULT_UTM,
       notice:
         parsed.notice?.message &&
@@ -58,7 +58,7 @@ export function config(): Config {
       restUrl: '',
       nonce: '',
       lang: 'en',
-      appUrl: 'https://app.neilpatel.com',
+      appUrl: 'https://ubersuggest.com',
       utm: DEFAULT_UTM,
     };
   }
